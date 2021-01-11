@@ -60,9 +60,9 @@ print_r($result);
 // function _flip($array) {
 //     $result = [];
 //     $key = array_key_first($array);
-//     $value = array_shift($array);
+//     $value = $array[$key];
 //     $result[$value] = $key;
-    
+//     unset($array[$key]);
 //     if (count($array) > 0) {
 //         $result = $result + _flip($array);
 //     }
@@ -84,7 +84,6 @@ function getKeyAndValue(&$array) {
 function confirmLastValue($array, $value) {
     return $array[count($array)-1] === $value;
 }
-
 function __flip($array) {
     $result = [];
     $keyAndvalue = getKeyAndValue($array);
