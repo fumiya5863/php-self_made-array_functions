@@ -17,5 +17,3 @@ By creating PHP array functions by yourself, you can get a deeper understanding 
 ## Author
 [fumiya5863](https://github.com/fumiya5863)
 
-## Licence
-
