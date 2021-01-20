@@ -1,2 +1,18 @@
 # php-self_made-array_functions
-Create an array of PHP array by yourself
+
+image or gif
+
+## Overview
+
+## Requirement
+
+## Usage
+
+## Features
+
+## Reference
+
+## Author
+
+## Licence
+
