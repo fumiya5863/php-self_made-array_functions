@@ -6,7 +6,7 @@
 /*=============================================================================*/
 
 
-$input_array = array('a', 'b', 'c', 'd', 'e');
+$input_array = array('a', 'b', 'c', 'd');
 
 // print_r(array_chunk($input_array, 2));
 // print_r(array_chunk($input_array, 2, true));
@@ -31,8 +31,8 @@ $input_array = array('a', 'b', 'c', 'd', 'e');
 // $result = chunk($input_array, 2, true);
 // print_r($result);
 
-// function _chunk($array, $length, $results, $result, $preserve_keys = false) {
-//     if (count($result) == $length) {
+// function _chunk($array, $length, $preserve_keys = false, $results = [], $result = []) {    
+//     if (count($result) === $length) {
 //         $results[] = $result;
 //         $result = [];
 //     }
@@ -45,28 +45,47 @@ $input_array = array('a', 'b', 'c', 'd', 'e');
 //         $result[] = $value;
 //     }
 //     if (count($array) > 0) {
-//         return _chunk($array, $length, $results, $result, $preserve_keys);
+//         return _chunk($array, $length, $preserve_keys, $results, $result);
 //     }
 //     $results[] = $result;
 //     return $results;
 // }
-// $result = _chunk($input_array, 2, [], [], true);
+// $result = _chunk($input_array, 2);
 // print_r($result);
 
-// function _chunk($array, $length, $result, $preserve_keys = false) {
-//     if (count($result) == $length) {
-//         $array[] = $result;
-//         $result = [];
-//     }
-//     $key = array_key_first($array);
-//     $value = $array[$key];
-//     $result[] = $value;
-//     if (!is_array($array[$key])) {
-//         unset($array[$key]);
-//         return _chunk($array, $length, $result, $preserve_keys);
-//     }
-//     $array[] = $result;
-//     return array_values($array);
+// 多次元配列以外
+function _chunk($array, $length, $preserve_keys = false, $result = []) {
+    if (count($result) === $length) {
+        $array[] = $result;
+        $result = [];
+    }
+    $key = array_key_first($array);
+    $value = $array[$key];
+    if ($preserve_keys === true) {
+        $result[$key] = $value;
+    } else {
+        $result[] = $value;
+    }
+    if (!is_array($array[$key])) {
+        unset($array[$key]);
+        return _chunk($array, $length, $preserve_keys, $result);
+    }
+    $array = array_values($array);
+    if ($array[0] != $result[$key]) {
+        array_pop($result);
+        $array[] = $result;
+    }
+    return $array;
+}
+$result = _chunk($input_array, 2, true);
+print_r($result);
+
+
+// function _twoChunk() {
+
 // }
-// $result = _chunk($input_array, 2, []);
-// print_r($result);
+
+// function _chunk($array, $length, $preserve_keys = false) {
+// }
+// $result = _chunk($input_array, 2);
+// print_r();
